@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>generateDW</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#47;</directory>
+    <parameters>
+        <parameter>
+            <name>FACTTABLE</name>
+            <default_value>myfact</default_value>
+            <description/>
+        </parameter>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2012&#47;04&#47;22 16:20:23.197</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2012&#47;04&#47;22 16:20:23.197</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <order>
+  <hop> <from>Generate Rows</from><to>Generate Dimensions</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Dimensions</from><to>Generate Resultset</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Resultset</from><to>Text file output</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>Generate Dimensions</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var dateDim = [];
+
+var months = [
+    [1,&quot;Jan&quot;,&quot;Janeiro&quot;],    [2,&quot;Fev&quot;,&quot;Fevereiro&quot;],    [3,&quot;Mar&quot;,&quot;Março&quot;],    [4,&quot;Abr&quot;,&quot;Abril&quot;],
+    [5,&quot;Mai&quot;,&quot;Maio&quot;],    [6,&quot;Jun&quot;,&quot;Junho&quot;],    [7,&quot;Jul&quot;,&quot;Julho&quot;],    [8,&quot;Ago&quot;,&quot;Agosto&quot;],
+    [9,&quot;Set&quot;,&quot;Setembro&quot;],    [10,&quot;Out&quot;,&quot;Outubro&quot;],    [11,&quot;Nov&quot;,&quot;Novembro&quot;],  
+    [12,&quot;Dec&quot;,&quot;Dezembro&quot;]
+];
+
+range(2000,2012).map(function(year){
+    range(0,12).map(function(month){
+        var m = months[month];
+        dateDim.push(
+            {&quot;year&quot;:year ,&quot;monthNo&quot;: m[0], &quot;monthAbbrev&quot;:m[1], &quot;monthDesc&quot;: m[2]}
+        );
+    });
+});
+;
+
+
+
+var provinces = [
+    {provinceName: &quot;Acre&quot;, provinceId: &quot;AC&quot;, proportion:3.7},
+    {provinceName: &quot;Alagoas&quot;, provinceId: &quot;AL&quot;, proportion:3.7},
+    {provinceName: &quot;Amapá&quot;, provinceId: &quot;AP&quot;, proportion:3.7},
+    {provinceName: &quot;Amazonas&quot;, provinceId: &quot;AM&quot;, proportion:3.7},
+    {provinceName: &quot;Bahia&quot;, provinceId: &quot;BA&quot;, proportion:3.7},
+    {provinceName: &quot;Ceará&quot;, provinceId: &quot;CE&quot;, proportion:3.7},
+    {provinceName: &quot;Distrito Federal&quot;, provinceId: &quot;DF&quot;, proportion:3.7},
+    {provinceName: &quot;Espírito Santo&quot;, provinceId: &quot;ES&quot;, proportion:3.7},
+    {provinceName: &quot;Goiás&quot;, provinceId: &quot;GO&quot;, proportion:3.7},
+    {provinceName: &quot;Maranhão&quot;, provinceId: &quot;MA&quot;, proportion:3.7},
+    {provinceName: &quot;Mato Grosso&quot;, provinceId: &quot;MT&quot;, proportion:3.7},
+    {provinceName: &quot;Mato Grosso do Sul&quot;, provinceId: &quot;MS&quot;, proportion:3.7},
+    {provinceName: &quot;Minais Gerais&quot;, provinceId: &quot;MG&quot;, proportion:3.7},
+    {provinceName: &quot;Pará&quot;, provinceId: &quot;PA&quot;, proportion:3.7},
+    {provinceName: &quot;Paraíba&quot;, provinceId: &quot;PB&quot;, proportion:3.7},
+    {provinceName: &quot;Paraná&quot;, provinceId: &quot;PR&quot;, proportion:3.7},
+    {provinceName: &quot;Pernambuco&quot;, provinceId: &quot;PE&quot;, proportion:3.7},
+    {provinceName: &quot;Piauí&quot;, provinceId: &quot;PI&quot;, proportion:3.7},
+    {provinceName: &quot;Rio de Janeiro&quot;, provinceId: &quot;RJ&quot;, proportion:3.8},
+    {provinceName: &quot;Rio Grande do Norte&quot;, provinceId: &quot;RN&quot;, proportion:3.7},
+    {provinceName: &quot;Rio Grande do Sul&quot;, provinceId: &quot;RS&quot;, proportion:3.7},
+    {provinceName: &quot;Rondónia&quot;, provinceId: &quot;RO&quot;, proportion:3.7},
+    {provinceName: &quot;Roraima&quot;, provinceId: &quot;RR&quot;, proportion:3.7},
+    {provinceName: &quot;Santa Catarina&quot;, provinceId: &quot;SC&quot;, proportion:3.7},
+    {provinceName: &quot;São Paulo&quot;, provinceId: &quot;SP&quot;, proportion:3.7},
+    {provinceName: &quot;Sergipe&quot;, provinceId: &quot;SE&quot;, proportion:3.7},
+    {provinceName: &quot;Tocantins&quot;, provinceId: &quot;TO&quot;, proportion:3.7},
+];
+
+var gender = [
+  {genderName: &quot;Homem&quot;, proportion: 45},  
+  {genderName: &quot;Mulher&quot;, proportion: 55}  
+];
+
+var countries = [
+  {countryName: &quot;Italianos&quot;, proportion: 30},  
+  {countryName: &quot;Portgueses&quot;, proportion: 18},  
+  {countryName: &quot;Alemães&quot;, proportion: 12},  
+  {countryName: &quot;Espanhóis&quot;, proportion: 10},  
+  {countryName: &quot;Japoneses&quot;, proportion: 15},  
+  {countryName: &quot;Coreanos&quot;, proportion: 8},  
+  {countryName: &quot;Chineses&quot;, proportion: 3},  
+  {countryName: &quot;Outros&quot;, proportion: 5}  
+];
+
+
+var outputArray = [
+    
+    {dimension: dateDim, toBreakdown: false, increment: 0.05 }, 
+    {dimension: provinces, toBreakdown: true },
+    {dimension: countries, toBreakdown: true },
+    {dimension: gender, toBreakdown: true } 
+ 
+ ]
+
+outputStr = JSON.stringify(outputArray);</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+
+var range = function(start, stop, step) {
+  if (arguments.length == 1) {
+    stop = start;
+    start = 0;
+  }
+  if (step == undefined) step = 1;
+  if ((stop - start) &#47; step == Infinity) throw new Error(&quot;range must be finite&quot;);
+  var array = [], i = 0, j;
+  stop -= (stop - start) * 1e-10; &#47;&#47; floating point precision!
+  if (step &lt; 0) {
+    while ((j = start + step * i++) &gt; stop) {
+      array.push(j);
+    }
+  } else {
+    while ((j = start + step * i++) &lt; stop) {
+      array.push(j);
+    }
+  }
+  return array;
+};
+
+
+&#47;*  JSON2 *&#47;
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n&lt;10?&apos;0&apos;+n:n;}
+if(typeof Date.prototype.toJSON!==&apos;function&apos;){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+&apos;-&apos;+
+f(this.getUTCMonth()+1)+&apos;-&apos;+
+f(this.getUTCDate())+&apos;T&apos;+
+f(this.getUTCHours())+&apos;:&apos;+
+f(this.getUTCMinutes())+&apos;:&apos;+
+f(this.getUTCSeconds())+&apos;Z&apos;:null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=&#47;[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,escapable=&#47;[\\\&quot;\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,gap,indent,meta={&apos;\b&apos;:&apos;\\b&apos;,&apos;\t&apos;:&apos;\\t&apos;,&apos;\n&apos;:&apos;\\n&apos;,&apos;\f&apos;:&apos;\\f&apos;,&apos;\r&apos;:&apos;\\r&apos;,&apos;&quot;&apos;:&apos;\\&quot;&apos;,&apos;\\&apos;:&apos;\\\\&apos;},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?&apos;&quot;&apos;+string.replace(escapable,function(a){var c=meta[a];return typeof c===&apos;string&apos;?c:&apos;\\u&apos;+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);})+&apos;&quot;&apos;:&apos;&quot;&apos;+string+&apos;&quot;&apos;;}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;&amp;&amp;typeof value.toJSON===&apos;function&apos;){value=value.toJSON(key);}
+if(typeof rep===&apos;function&apos;){value=rep.call(holder,key,value);}
+switch(typeof value){case&apos;string&apos;:return quote(value);case&apos;number&apos;:return isFinite(value)?String(value):&apos;null&apos;;case&apos;boolean&apos;:case&apos;null&apos;:return String(value);case&apos;object&apos;:if(!value){return&apos;null&apos;;}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)===&apos;[object Array]&apos;){length=value.length;for(i=0;i&lt;length;i+=1){partial[i]=str(i,value)||&apos;null&apos;;}
+v=partial.length===0?&apos;[]&apos;:gap?&apos;[\n&apos;+gap+
+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;]&apos;:&apos;[&apos;+partial.join(&apos;,&apos;)+&apos;]&apos;;gap=mind;return v;}
+if(rep&amp;&amp;typeof rep===&apos;object&apos;){length=rep.length;for(i=0;i&lt;length;i+=1){k=rep[i];if(typeof k===&apos;string&apos;){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}
+v=partial.length===0?&apos;{}&apos;:gap?&apos;{\n&apos;+gap+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;}&apos;:&apos;{&apos;+partial.join(&apos;,&apos;)+&apos;}&apos;;gap=mind;return v;}}
+if(typeof JSON.stringify!==&apos;function&apos;){JSON.stringify=function(value,replacer,space){var i;gap=&apos;&apos;;indent=&apos;&apos;;if(typeof space===&apos;number&apos;){for(i=0;i&lt;space;i+=1){indent+=&apos; &apos;;}}else if(typeof space===&apos;string&apos;){indent=space;}
+rep=replacer;if(replacer&amp;&amp;typeof replacer!==&apos;function&apos;&amp;&amp;(typeof replacer!==&apos;object&apos;||typeof replacer.length!==&apos;number&apos;)){throw new Error(&apos;JSON.stringify&apos;);}
+return str(&apos;&apos;,{&apos;&apos;:value});};}
+if(typeof JSON.parse!==&apos;function&apos;){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return&apos;\\u&apos;+
+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
+throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
+
+
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
+        <rename>outputStr</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>286</xloc>
+      <yloc>134</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Resultset</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var args = JSON.parse(outputStr);
+
+outputStr = &quot;&quot;;
+
+var generateRow = function(row){
+
+	outputStr = &quot;insert into &quot;+getVariable(&quot;FACTTABLE&quot;,&quot;unknown&quot;)+&quot; values( &quot; + 
+ 		row.map(function(c){return JSON.stringify(c)}).join(&quot;,&quot;) +  &quot;);&quot;; 
+	
+	newRow = createRowCopy(getOutputRowMeta().size());
+    newRow[0] = outputStr;
+    putRow(newRow);
+    
+}
+
+
+var rs = [];
+
+var total = 5000;
+randomizeData( args, total, rs,[]);
+</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+
+var randomizeData = function(_arr, total, rs, _row){
+    
+    var arr = _arr.slice();
+    var dimArray = arr.splice(0,1)[0];
+    var isLastDim = arr.length == 0;
+    
+    var dimension = dimArray.dimension;
+    var toBreakdown = dimArray.toBreakdown || false;
+    var increment = dimArray.increment || 0;
+    
+    var isFirst = true;
+    
+    dimension.map(function(memberObj){
+        var value;
+        var row = _row.slice();
+        if(toBreakdown){
+            &#47;&#47; There&apos;s a &quot;proportion&quot; property
+            value = total * (memberObj.proportion&#47;100) * (1+ 0.3*(0.5 - Math.random()));;
+            &#47;&#47;console.log(value);
+        }
+        else{
+            &#47;&#47; todo
+            total += total * increment * (0.75 - Math.random());
+            value = total;
+        }
+        
+        &#47;&#47; Add the obj properties to the resultset
+        for(key in memberObj){
+            if(key !== &quot;proportion&quot;){
+                row.push(memberObj[key]);
+            }
+        };
+        
+    
+        &#47;&#47; iterate until we&apos;re finished with dimentions
+        if(arr.length &gt; 0){
+            randomizeData(arr , value, rs, row);
+        }
+        else{
+            &#47;&#47; no more iterations? add the total and push it to the resultset
+            row.push(value);
+            rs.push(row);
+            generateRow(row);
+            row = [];
+        }
+        
+        
+        
+    });
+    
+
+}
+
+
+&#47;*  JSON2 *&#47;
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n&lt;10?&apos;0&apos;+n:n;}
+if(typeof Date.prototype.toJSON!==&apos;function&apos;){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+&apos;-&apos;+
+f(this.getUTCMonth()+1)+&apos;-&apos;+
+f(this.getUTCDate())+&apos;T&apos;+
+f(this.getUTCHours())+&apos;:&apos;+
+f(this.getUTCMinutes())+&apos;:&apos;+
+f(this.getUTCSeconds())+&apos;Z&apos;:null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=&#47;[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,escapable=&#47;[\\\&quot;\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,gap,indent,meta={&apos;\b&apos;:&apos;\\b&apos;,&apos;\t&apos;:&apos;\\t&apos;,&apos;\n&apos;:&apos;\\n&apos;,&apos;\f&apos;:&apos;\\f&apos;,&apos;\r&apos;:&apos;\\r&apos;,&apos;&quot;&apos;:&apos;\\&quot;&apos;,&apos;\\&apos;:&apos;\\\\&apos;},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?&apos;&quot;&apos;+string.replace(escapable,function(a){var c=meta[a];return typeof c===&apos;string&apos;?c:&apos;\\u&apos;+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);})+&apos;&quot;&apos;:&apos;&quot;&apos;+string+&apos;&quot;&apos;;}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;&amp;&amp;typeof value.toJSON===&apos;function&apos;){value=value.toJSON(key);}
+if(typeof rep===&apos;function&apos;){value=rep.call(holder,key,value);}
+switch(typeof value){case&apos;string&apos;:return quote(value);case&apos;number&apos;:return isFinite(value)?String(value):&apos;null&apos;;case&apos;boolean&apos;:case&apos;null&apos;:return String(value);case&apos;object&apos;:if(!value){return&apos;null&apos;;}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)===&apos;[object Array]&apos;){length=value.length;for(i=0;i&lt;length;i+=1){partial[i]=str(i,value)||&apos;null&apos;;}
+v=partial.length===0?&apos;[]&apos;:gap?&apos;[\n&apos;+gap+
+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;]&apos;:&apos;[&apos;+partial.join(&apos;,&apos;)+&apos;]&apos;;gap=mind;return v;}
+if(rep&amp;&amp;typeof rep===&apos;object&apos;){length=rep.length;for(i=0;i&lt;length;i+=1){k=rep[i];if(typeof k===&apos;string&apos;){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}
+v=partial.length===0?&apos;{}&apos;:gap?&apos;{\n&apos;+gap+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;}&apos;:&apos;{&apos;+partial.join(&apos;,&apos;)+&apos;}&apos;;gap=mind;return v;}}
+if(typeof JSON.stringify!==&apos;function&apos;){JSON.stringify=function(value,replacer,space){var i;gap=&apos;&apos;;indent=&apos;&apos;;if(typeof space===&apos;number&apos;){for(i=0;i&lt;space;i+=1){indent+=&apos; &apos;;}}else if(typeof space===&apos;string&apos;){indent=space;}
+rep=replacer;if(replacer&amp;&amp;typeof replacer!==&apos;function&apos;&amp;&amp;(typeof replacer!==&apos;object&apos;||typeof replacer.length!==&apos;number&apos;)){throw new Error(&apos;JSON.stringify&apos;);}
+return str(&apos;&apos;,{&apos;&apos;:value});};}
+if(typeof JSON.parse!==&apos;function&apos;){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return&apos;\\u&apos;+
+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
+throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
+
+
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
+        <rename>outputStr</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>455</xloc>
+      <yloc>135</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>outputStr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <limit>1</limit>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>80</xloc>
+      <yloc>134</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text file output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;output&#47;${FACTTABLE}</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>outputStr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>650</xloc>
+      <yloc>134</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var args = JSON.parse(outputStr);	
+
+var outputDDL = &quot;&quot;;
+var mondrianSchema = &quot;&quot;;
+var outputDML = &quot;&quot;;
+
+mondrianSchema = &quot;&lt;Schema name=&apos;GeneratedSchema&apos;&gt;&quot;;
+mondrianSchema += &quot;&lt;Cube name=&apos;GeneratedCube&apos;&gt;&quot;;
+mondrianSchema += &quot;&lt;Table name=&apos;facts&apos;&#47;&gt;&quot;;
+
+
+var factTableDDL = &quot;CREATE TABLE facts (&quot;;
+args.map(function (dimension) {
+	outputDDL += &quot;CREATE TABLE &quot; + dimension.name + &quot; (&quot;;
+		
+	var levels = {};
+	var columns = {}
+	for (var i=0; i &lt; dimension.dimension.length; i++) {
+		var memberObj = dimension.dimension[i];
+		for(var key in memberObj){
+			if(key !== &quot;proportion&quot;) {
+				var index = key.search(&#47;[A-Z]&#47;);
+				var levelKey = key;
+				if (index != -1)
+					levelKey = key.substring(0, index); 
+				var levelRep = [];
+				if (levels.has(levelKey) {
+					levelRep = levels[levelKey];
+				} 
+				levelRep.push(key);
+				levels[levelKey] = levelRep;
+			}
+		}
+	}
+
+
+	for (var key in levels) {
+		boolean hasId = false;
+		var levelAttributes = levels[key];
+		for (var t = 0; t &lt; levelAttributes.length; t++) {
+			var isId = levelAttributes[t].match(&quot;Id$&quot;)==&quot;Id&quot;;
+
+		}
+		if (!hasId) {
+			factTableDDL += dimension.name + &quot;Id varchar(20), &quot;;
+		}					
+	}
+
+
+&#47;&#47;	factTableDDL += dimension.name + &quot;Id varchar(20), &quot;;
+	outputDDL += &quot;);&quot;;
+});
+
+factTableDDL += &quot; value int(11));
+outputDDL += factTableDDL;
+
+mondrianSchema += &quot;&lt;&#47;Cube&gt;&quot;;
+mondrianSchema += &quot;&lt;&#47;Schema&gt;&quot;;
+
+
+outputStr =  JSON.stringify(outputArray);</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+&#47;*  JSON2 *&#47;
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n&lt;10?&apos;0&apos;+n:n;}
+if(typeof Date.prototype.toJSON!==&apos;function&apos;){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+&apos;-&apos;+
+f(this.getUTCMonth()+1)+&apos;-&apos;+
+f(this.getUTCDate())+&apos;T&apos;+
+f(this.getUTCHours())+&apos;:&apos;+
+f(this.getUTCMinutes())+&apos;:&apos;+
+f(this.getUTCSeconds())+&apos;Z&apos;:null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=&#47;[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,escapable=&#47;[\\\&quot;\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,gap,indent,meta={&apos;\b&apos;:&apos;\\b&apos;,&apos;\t&apos;:&apos;\\t&apos;,&apos;\n&apos;:&apos;\\n&apos;,&apos;\f&apos;:&apos;\\f&apos;,&apos;\r&apos;:&apos;\\r&apos;,&apos;&quot;&apos;:&apos;\\&quot;&apos;,&apos;\\&apos;:&apos;\\\\&apos;},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?&apos;&quot;&apos;+string.replace(escapable,function(a){var c=meta[a];return typeof c===&apos;string&apos;?c:&apos;\\u&apos;+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);})+&apos;&quot;&apos;:&apos;&quot;&apos;+string+&apos;&quot;&apos;;}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;&amp;&amp;typeof value.toJSON===&apos;function&apos;){value=value.toJSON(key);}
+if(typeof rep===&apos;function&apos;){value=rep.call(holder,key,value);}
+switch(typeof value){case&apos;string&apos;:return quote(value);case&apos;number&apos;:return isFinite(value)?String(value):&apos;null&apos;;case&apos;boolean&apos;:case&apos;null&apos;:return String(value);case&apos;object&apos;:if(!value){return&apos;null&apos;;}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)===&apos;[object Array]&apos;){length=value.length;for(i=0;i&lt;length;i+=1){partial[i]=str(i,value)||&apos;null&apos;;}
+v=partial.length===0?&apos;[]&apos;:gap?&apos;[\n&apos;+gap+
+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;]&apos;:&apos;[&apos;+partial.join(&apos;,&apos;)+&apos;]&apos;;gap=mind;return v;}
+if(rep&amp;&amp;typeof rep===&apos;object&apos;){length=rep.length;for(i=0;i&lt;length;i+=1){k=rep[i];if(typeof k===&apos;string&apos;){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}
+v=partial.length===0?&apos;{}&apos;:gap?&apos;{\n&apos;+gap+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;}&apos;:&apos;{&apos;+partial.join(&apos;,&apos;)+&apos;}&apos;;gap=mind;return v;}}
+if(typeof JSON.stringify!==&apos;function&apos;){JSON.stringify=function(value,replacer,space){var i;gap=&apos;&apos;;indent=&apos;&apos;;if(typeof space===&apos;number&apos;){for(i=0;i&lt;space;i+=1){indent+=&apos; &apos;;}}else if(typeof space===&apos;string&apos;){indent=space;}
+rep=replacer;if(replacer&amp;&amp;typeof replacer!==&apos;function&apos;&amp;&amp;(typeof replacer!==&apos;object&apos;||typeof replacer.length!==&apos;number&apos;)){throw new Error(&apos;JSON.stringify&apos;);}
+return str(&apos;&apos;,{&apos;&apos;:value});};}
+if(typeof JSON.parse!==&apos;function&apos;){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return&apos;\\u&apos;+
+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
+throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
+
+
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
+        <rename>outputStr</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>323</xloc>
+      <yloc>333</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>
