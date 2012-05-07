@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>generateDW</name>
+    <name>CDG</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -288,7 +288,7 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </step>
 
   <step>
-    <name>Randomize data</name>
+    <name>Generate Schema</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -313,78 +313,57 @@ var args = JSON.parse(outputStr);
 outputStr = &quot;&quot;;
 
 var generateRow = function(row){
-
-	outputStr = &quot;insert into &quot;+getVariable(&quot;FACTTABLE&quot;,&quot;unknown&quot;)+&quot; values( &quot; + 
- 		row.map(function(c){return JSON.stringify(c)}).join(&quot;,&quot;) +  &quot;);&quot;; 
-	
-	newRow = createRowCopy(getOutputRowMeta().size());
-    newRow[0] = outputStr;
-    putRow(newRow);
-    
+	outputStr += row;    
 }
 
 
-var rs = [];
-
-randomizeData( args, total, rs,[]);
+schemaGenerator(args);
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
+var facttable = getVariable(&quot;FACTTABLE&quot;,&quot;XXX&quot;);
 
-var randomizeData = function(_arr, total, rs, _row){
+
+var schemaGenerator = function(args){
     
-    var arr = _arr.slice();
-    var dimArray = arr.splice(0,1)[0];
-    var isLastDim = arr.length == 0;
+    var capitalize = function(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+    }
     
-    var dimension = dimArray.dimension;
-    var toBreakdown = dimArray.toBreakdown || false;
-    var increment = dimArray.increment || 0;
-    
-    var isFirst = true;
-    
-    dimension.map(function(memberObj){
-        var value;
-        var row = _row.slice();
-        if(toBreakdown){
-            &#47;&#47; There&apos;s a &quot;proportion&quot; property
-            value = total * (memberObj.proportion&#47;100) * (1+ 0.3*(0.5 - Math.random()));;
-            &#47;&#47;console.log(value);
-        }
-        else{
-            &#47;&#47; todo
-            total += total * increment * (0.75 - Math.random());
-            value = total;
-        }
+    var schema = &lt;Schema name={facttable}&gt;&lt;Cube name={facttable}&gt;&lt;Table name={facttable}&#47;&gt;&lt;&#47;Cube&gt;&lt;&#47;Schema&gt;;
         
-        &#47;&#47; Add the obj properties to the resultset
-        for(key in memberObj){
-            if(key !== &quot;proportion&quot;){
-                row.push(memberObj[key]);
+    for( var i in args){
+
+        var dimArray = args[i];
+
+        var name = capitalize(dimArray.name.substr(dimArray.name.indexOf(&quot;_&quot;)+1));
+        var dimension = dimArray.dimension[0];
+
+        var dimXml = &lt;Dimension name={name}&gt;&lt;Hierarchy hasAll=&quot;true&quot; allMemberName=&quot;All&quot;&gt;&lt;&#47;Hierarchy&gt;&lt;&#47;Dimension&gt;;
+
+        for(var key in dimension){
+            if(key !== &quot;proportion&quot;) {
+                dimXml.Hierarchy.appendChild(&lt;Level name={capitalize(key)} column={key} type={function(){return typeof( dimension[key] ) === &apos;number&apos;?&quot;Numeric&quot;:&quot;String&quot;}()}&gt;&lt;&#47;Level&gt;)
             }
-        };
-        
-    
-        &#47;&#47; iterate until we&apos;re finished with dimentions
-        if(arr.length &gt; 0){
-            randomizeData(arr , value, rs, row);
         }
-        else{
-            &#47;&#47; no more iterations? add the total and push it to the resultset
-            row.push(value);
-            rs.push(row);
-            generateRow(row);
-            row = [];
-        }
-        
-        
-        
-    });
-    
 
+        schema.Cube.appendChild(dimXml);
+
+    };
+    
+    &#47;&#47; Add Measures
+	schema.Cube.appendChild(&lt;Measure name=&quot;Value&quot; column=&quot;value&quot; aggregator=&quot;sum&quot; datatype=&quot;Integer&quot; formatString=&quot;#,###&quot;&#47;&gt;);
+
+    
+    generateRow(schema.toXMLString(2));
+    
 }
+
+
+
+
 
 
 &#47;*  JSON2 *&#47;
@@ -426,8 +405,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>598</xloc>
-      <yloc>134</yloc>
+      <xloc>597</xloc>
+      <yloc>319</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -459,69 +438,6 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
-      <yloc>134</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Output inserts</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>UTF-8</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;output&#47;${FACTTABLE}</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>outputStr</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
       <yloc>134</yloc>
       <draw>Y</draw>
       </GUI>
@@ -728,7 +644,70 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </step>
 
   <step>
-    <name>Generate Schema</name>
+    <name>Output inserts</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;output&#47;${FACTTABLE}</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>outputStr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>828</xloc>
+      <yloc>134</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Randomize data</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -753,57 +732,78 @@ var args = JSON.parse(outputStr);
 outputStr = &quot;&quot;;
 
 var generateRow = function(row){
-	outputStr += row;    
+
+	outputStr = &quot;insert into &quot;+getVariable(&quot;FACTTABLE&quot;,&quot;unknown&quot;)+&quot; values( &quot; + 
+ 		row.map(function(c){return JSON.stringify(c)}).join(&quot;,&quot;) +  &quot;);&quot;; 
+	
+	newRow = createRowCopy(getOutputRowMeta().size());
+    newRow[0] = outputStr;
+    putRow(newRow);
+    
 }
 
 
-schemaGenerator(args);
+var rs = [];
+
+randomizeData( args, total, rs,[]);
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var facttable = getVariable(&quot;FACTTABLE&quot;,&quot;XXX&quot;);
 
-
-var schemaGenerator = function(args){
+var randomizeData = function(_arr, total, rs, _row){
     
-    var capitalize = function(s) {
-        return s.charAt(0).toUpperCase() + s.slice(1);
-    }
+    var arr = _arr.slice();
+    var dimArray = arr.splice(0,1)[0];
+    var isLastDim = arr.length == 0;
     
-    var schema = &lt;Schema name={facttable}&gt;&lt;Cube name={facttable}&gt;&lt;Table name={facttable}&#47;&gt;&lt;&#47;Cube&gt;&lt;&#47;Schema&gt;;
-        
-    for( var i in args){
-
-        var dimArray = args[i];
-
-        var name = capitalize(dimArray.name.substr(dimArray.name.indexOf(&quot;_&quot;)+1));
-        var dimension = dimArray.dimension[0];
-
-        var dimXml = &lt;Dimension name={name}&gt;&lt;Hierarchy hasAll=&quot;true&quot; allMemberName=&quot;All&quot;&gt;&lt;&#47;Hierarchy&gt;&lt;&#47;Dimension&gt;;
-
-        for(var key in dimension){
-            if(key !== &quot;proportion&quot;) {
-                dimXml.Hierarchy.appendChild(&lt;Level name={capitalize(key)} column={key} type={function(){return typeof( dimension[key] ) === &apos;number&apos;?&quot;Numeric&quot;:&quot;String&quot;}()}&gt;&lt;&#47;Level&gt;)
-            }
+    var dimension = dimArray.dimension;
+    var toBreakdown = dimArray.toBreakdown || false;
+    var increment = dimArray.increment || 0;
+    
+    var isFirst = true;
+    
+    dimension.map(function(memberObj){
+        var value;
+        var row = _row.slice();
+        if(toBreakdown){
+            &#47;&#47; There&apos;s a &quot;proportion&quot; property
+            value = total * (memberObj.proportion&#47;100) * (1+ 0.3*(0.5 - Math.random()));;
+            &#47;&#47;console.log(value);
         }
-
-        schema.Cube.appendChild(dimXml);
-
-    };
+        else{
+            &#47;&#47; todo
+            total += total * increment * (0.75 - Math.random());
+            value = total;
+        }
+        
+        &#47;&#47; Add the obj properties to the resultset
+        for(key in memberObj){
+            if(key !== &quot;proportion&quot;){
+                row.push(memberObj[key]);
+            }
+        };
+        
     
-    &#47;&#47; Add Measures
-	schema.Cube.appendChild(&lt;Measure name=&quot;Value&quot; column=&quot;value&quot; aggregator=&quot;sum&quot; datatype=&quot;Integer&quot; formatString=&quot;#,###&quot;&#47;&gt;);
+        &#47;&#47; iterate until we&apos;re finished with dimentions
+        if(arr.length &gt; 0){
+            randomizeData(arr , value, rs, row);
+        }
+        else{
+            &#47;&#47; no more iterations? add the total and push it to the resultset
+            row.push(value);
+            rs.push(row);
+            generateRow(row);
+            row = [];
+        }
+        
+        
+        
+    });
+    
 
-    
-    generateRow(schema.toXMLString(2));
-    
 }
-
-
-
-
 
 
 &#47;*  JSON2 *&#47;
@@ -845,8 +845,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>597</xloc>
-      <yloc>319</yloc>
+      <xloc>598</xloc>
+      <yloc>134</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
