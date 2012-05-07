@@ -11,7 +11,7 @@
     <parameters>
         <parameter>
             <name>FACTTABLE</name>
-            <default_value>myfact</default_value>
+            <default_value>cdgsample</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -72,23 +72,109 @@
   <modified_date>2012&#47;04&#47;22 16:20:23.197</modified_date>
   </info>
   <notepads>
+    <notepad>
+      <note>Configure fact table name in transformation properties. 
+Defaults to &quot;myfact&quot;.
+
+Configure the Dimension Info step for the dimensions</note>
+      <xloc>57</xloc>
+      <yloc>21</yloc>
+      <width>330</width>
+      <heigth>74</heigth>
+      <fontname>Arial</fontname>
+      <fontsize>10</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>165</backgroundcolorgreen>
+      <backgroundcolorblue>0</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <order>
-  <hop> <from>Generate Rows</from><to>Generate Dimensions</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Dimensions</from><to>Generate Resultset</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Resultset</from><to>Text file output</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Generate dummy row</from><to>Dimension Info *CONFIGURE ME*</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Randomize data</to><enabled>Y</enabled> </hop>  <hop> <from>Randomize data</from><to>Output inserts</to><enabled>Y</enabled> </hop>  <hop> <from>Generate table ddl</from><to>Output ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate table ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Schema</from><to>Write schema</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate Schema</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Generate Dimensions</name>
+    <name>Dimension Info *CONFIGURE ME*</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
+        <jsScript_script>
+&#47;* SET THE APPROXIMATE TOTAL FOR THE VALUES *&#47;
+
+var total = 5000;
+
+
+&#47;* CONFIGURE THE DIMENSIONS.. *&#47;
+
+
+var provinces = [
+    {provinceName: &quot;Acre&quot;, provinceId: &quot;AC&quot;, proportion:3.7},
+    {provinceName: &quot;Alagoas&quot;, provinceId: &quot;AL&quot;, proportion:3.7},
+    {provinceName: &quot;Amapá&quot;, provinceId: &quot;AP&quot;, proportion:3.7},
+    {provinceName: &quot;Amazonas&quot;, provinceId: &quot;AM&quot;, proportion:3.7},
+    {provinceName: &quot;Bahia&quot;, provinceId: &quot;BA&quot;, proportion:3.7},
+    {provinceName: &quot;Ceará&quot;, provinceId: &quot;CE&quot;, proportion:3.7},
+    {provinceName: &quot;Distrito Federal&quot;, provinceId: &quot;DF&quot;, proportion:3.7},
+    {provinceName: &quot;Espírito Santo&quot;, provinceId: &quot;ES&quot;, proportion:3.7},
+    {provinceName: &quot;Goiás&quot;, provinceId: &quot;GO&quot;, proportion:3.7},
+    {provinceName: &quot;Maranhão&quot;, provinceId: &quot;MA&quot;, proportion:3.7},
+    {provinceName: &quot;Mato Grosso&quot;, provinceId: &quot;MT&quot;, proportion:3.7},
+    {provinceName: &quot;Mato Grosso do Sul&quot;, provinceId: &quot;MS&quot;, proportion:3.7},
+    {provinceName: &quot;Minas Gerais&quot;, provinceId: &quot;MG&quot;, proportion:3.7},
+    {provinceName: &quot;Pará&quot;, provinceId: &quot;PA&quot;, proportion:3.7},
+    {provinceName: &quot;Paraíba&quot;, provinceId: &quot;PB&quot;, proportion:3.7},
+    {provinceName: &quot;Paraná&quot;, provinceId: &quot;PR&quot;, proportion:3.7},
+    {provinceName: &quot;Pernambuco&quot;, provinceId: &quot;PE&quot;, proportion:3.7},
+    {provinceName: &quot;Piauí&quot;, provinceId: &quot;PI&quot;, proportion:3.7},
+    {provinceName: &quot;Rio de Janeiro&quot;, provinceId: &quot;RJ&quot;, proportion:3.8},
+    {provinceName: &quot;Rio Grande do Norte&quot;, provinceId: &quot;RN&quot;, proportion:3.7},
+    {provinceName: &quot;Rio Grande do Sul&quot;, provinceId: &quot;RS&quot;, proportion:3.7},
+    {provinceName: &quot;Rondônia&quot;, provinceId: &quot;RO&quot;, proportion:3.7},
+    {provinceName: &quot;Roraima&quot;, provinceId: &quot;RR&quot;, proportion:3.7},
+    {provinceName: &quot;Santa Catarina&quot;, provinceId: &quot;SC&quot;, proportion:3.7},
+    {provinceName: &quot;São Paulo&quot;, provinceId: &quot;SP&quot;, proportion:3.7},
+    {provinceName: &quot;Sergipe&quot;, provinceId: &quot;SE&quot;, proportion:3.7},
+    {provinceName: &quot;Tocantins&quot;, provinceId: &quot;TO&quot;, proportion:3.7},
+];
+
+var gender = [
+  {genderName: &quot;Homem&quot;, proportion: 45},  
+  {genderName: &quot;Mulher&quot;, proportion: 55}  
+];
+
+var countries = [
+  {countryName: &quot;Italianos&quot;, proportion: 30},  
+  {countryName: &quot;Portugueses&quot;, proportion: 18},  
+  {countryName: &quot;Alemães&quot;, proportion: 12},  
+  {countryName: &quot;Espanhóis&quot;, proportion: 10},  
+  {countryName: &quot;Japoneses&quot;, proportion: 15},  
+  {countryName: &quot;Coreanos&quot;, proportion: 8},  
+  {countryName: &quot;Chineses&quot;, proportion: 3},  
+  {countryName: &quot;Outros&quot;, proportion: 5}  
+];
+
+var cores = [
+  {corName: &quot;Verde&quot;, proportion: 30},  
+  {corName: &quot;Vermelho&quot;, proportion: 70}  
+];
+
+
+&#47;* CONFIGURE THE DATE DIMENSION. *&#47;
 
 var dateDim = [];
 
@@ -110,60 +196,14 @@ range(2000,2012).map(function(year){
 ;
 
 
-
-var provinces = [
-    {provinceName: &quot;Acre&quot;, provinceId: &quot;AC&quot;, proportion:3.7},
-    {provinceName: &quot;Alagoas&quot;, provinceId: &quot;AL&quot;, proportion:3.7},
-    {provinceName: &quot;Amapá&quot;, provinceId: &quot;AP&quot;, proportion:3.7},
-    {provinceName: &quot;Amazonas&quot;, provinceId: &quot;AM&quot;, proportion:3.7},
-    {provinceName: &quot;Bahia&quot;, provinceId: &quot;BA&quot;, proportion:3.7},
-    {provinceName: &quot;Ceará&quot;, provinceId: &quot;CE&quot;, proportion:3.7},
-    {provinceName: &quot;Distrito Federal&quot;, provinceId: &quot;DF&quot;, proportion:3.7},
-    {provinceName: &quot;Espírito Santo&quot;, provinceId: &quot;ES&quot;, proportion:3.7},
-    {provinceName: &quot;Goiás&quot;, provinceId: &quot;GO&quot;, proportion:3.7},
-    {provinceName: &quot;Maranhão&quot;, provinceId: &quot;MA&quot;, proportion:3.7},
-    {provinceName: &quot;Mato Grosso&quot;, provinceId: &quot;MT&quot;, proportion:3.7},
-    {provinceName: &quot;Mato Grosso do Sul&quot;, provinceId: &quot;MS&quot;, proportion:3.7},
-    {provinceName: &quot;Minais Gerais&quot;, provinceId: &quot;MG&quot;, proportion:3.7},
-    {provinceName: &quot;Pará&quot;, provinceId: &quot;PA&quot;, proportion:3.7},
-    {provinceName: &quot;Paraíba&quot;, provinceId: &quot;PB&quot;, proportion:3.7},
-    {provinceName: &quot;Paraná&quot;, provinceId: &quot;PR&quot;, proportion:3.7},
-    {provinceName: &quot;Pernambuco&quot;, provinceId: &quot;PE&quot;, proportion:3.7},
-    {provinceName: &quot;Piauí&quot;, provinceId: &quot;PI&quot;, proportion:3.7},
-    {provinceName: &quot;Rio de Janeiro&quot;, provinceId: &quot;RJ&quot;, proportion:3.8},
-    {provinceName: &quot;Rio Grande do Norte&quot;, provinceId: &quot;RN&quot;, proportion:3.7},
-    {provinceName: &quot;Rio Grande do Sul&quot;, provinceId: &quot;RS&quot;, proportion:3.7},
-    {provinceName: &quot;Rondónia&quot;, provinceId: &quot;RO&quot;, proportion:3.7},
-    {provinceName: &quot;Roraima&quot;, provinceId: &quot;RR&quot;, proportion:3.7},
-    {provinceName: &quot;Santa Catarina&quot;, provinceId: &quot;SC&quot;, proportion:3.7},
-    {provinceName: &quot;São Paulo&quot;, provinceId: &quot;SP&quot;, proportion:3.7},
-    {provinceName: &quot;Sergipe&quot;, provinceId: &quot;SE&quot;, proportion:3.7},
-    {provinceName: &quot;Tocantins&quot;, provinceId: &quot;TO&quot;, proportion:3.7},
-];
-
-var gender = [
-  {genderName: &quot;Homem&quot;, proportion: 45},  
-  {genderName: &quot;Mulher&quot;, proportion: 55}  
-];
-
-var countries = [
-  {countryName: &quot;Italianos&quot;, proportion: 30},  
-  {countryName: &quot;Portgueses&quot;, proportion: 18},  
-  {countryName: &quot;Alemães&quot;, proportion: 12},  
-  {countryName: &quot;Espanhóis&quot;, proportion: 10},  
-  {countryName: &quot;Japoneses&quot;, proportion: 15},  
-  {countryName: &quot;Coreanos&quot;, proportion: 8},  
-  {countryName: &quot;Chineses&quot;, proportion: 3},  
-  {countryName: &quot;Outros&quot;, proportion: 5}  
-];
-
+&#47;* MAKE THE FINAL CONFIGIURATION. DIMENSIONS CAN EITHER BE SNAPSHOT OR REGULAR BREAKDOWNS *&#47; 
 
 var outputArray = [
     
-    {dimension: dateDim, toBreakdown: false, increment: 0.05 }, 
-    {dimension: provinces, toBreakdown: true },
-    {dimension: countries, toBreakdown: true },
-    {dimension: gender, toBreakdown: true } 
+    {name: &quot;Date&quot;, dimension: dateDim, toBreakdown: false, increment: 0.05 }, 
+    {name: &quot;Provices&quot;, dimension: provinces, toBreakdown: true },
+    {name: &quot;Countries&quot;, dimension: countries, toBreakdown: true },
+    {name: &quot;Dates&quot;, dimension: gender, toBreakdown: true } 
  
  ]
 
@@ -233,6 +273,12 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <length>-1</length>
         <precision>-1</precision>
         <replace>Y</replace>
+      </field>      <field>        <name>total</name>
+        <rename>total</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>286</xloc>
@@ -242,7 +288,7 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </step>
 
   <step>
-    <name>Generate Resultset</name>
+    <name>Randomize data</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -252,9 +298,15 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
+
+
+
+&#47;* NO NEED TO CHANGE ANYTHING HERE... *&#47;
+
 
 var args = JSON.parse(outputStr);
 
@@ -274,7 +326,6 @@ var generateRow = function(row){
 
 var rs = [];
 
-var total = 5000;
 randomizeData( args, total, rs,[]);
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
@@ -366,7 +417,6 @@ text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function
 if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
 throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
 
-
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
         <rename>outputStr</rename>
@@ -376,14 +426,14 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>455</xloc>
-      <yloc>135</yloc>
+      <xloc>598</xloc>
+      <yloc>134</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Generate Rows</name>
+    <name>Generate dummy row</name>
     <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
@@ -415,7 +465,7 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </step>
 
   <step>
-    <name>Text file output</name>
+    <name>Output inserts</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -432,7 +482,7 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -471,14 +521,14 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>650</xloc>
+      <xloc>828</xloc>
       <yloc>134</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
+    <name>Generate table ddl</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -488,74 +538,86 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var args = JSON.parse(outputStr);	
-
-var outputDDL = &quot;&quot;;
-var mondrianSchema = &quot;&quot;;
-var outputDML = &quot;&quot;;
-
-mondrianSchema = &quot;&lt;Schema name=&apos;GeneratedSchema&apos;&gt;&quot;;
-mondrianSchema += &quot;&lt;Cube name=&apos;GeneratedCube&apos;&gt;&quot;;
-mondrianSchema += &quot;&lt;Table name=&apos;facts&apos;&#47;&gt;&quot;;
 
 
-var factTableDDL = &quot;CREATE TABLE facts (&quot;;
-args.map(function (dimension) {
-	outputDDL += &quot;CREATE TABLE &quot; + dimension.name + &quot; (&quot;;
-		
-	var levels = {};
-	var columns = {}
-	for (var i=0; i &lt; dimension.dimension.length; i++) {
-		var memberObj = dimension.dimension[i];
-		for(var key in memberObj){
-			if(key !== &quot;proportion&quot;) {
-				var index = key.search(&#47;[A-Z]&#47;);
-				var levelKey = key;
-				if (index != -1)
-					levelKey = key.substring(0, index); 
-				var levelRep = [];
-				if (levels.has(levelKey) {
-					levelRep = levels[levelKey];
-				} 
-				levelRep.push(key);
-				levels[levelKey] = levelRep;
-			}
-		}
-	}
+&#47;* NO NEED TO CHANGE ANYTHING HERE... *&#47;
 
 
-	for (var key in levels) {
-		boolean hasId = false;
-		var levelAttributes = levels[key];
-		for (var t = 0; t &lt; levelAttributes.length; t++) {
-			var isId = levelAttributes[t].match(&quot;Id$&quot;)==&quot;Id&quot;;
+var args = JSON.parse(outputStr);
 
-		}
-		if (!hasId) {
-			factTableDDL += dimension.name + &quot;Id varchar(20), &quot;;
-		}					
-	}
+outputStr = &quot;&quot;;
+
+var generateRow = function(row){
+	outputStr += row;    
+}
 
 
-&#47;&#47;	factTableDDL += dimension.name + &quot;Id varchar(20), &quot;;
-	outputDDL += &quot;);&quot;;
-});
-
-factTableDDL += &quot; value int(11));
-outputDDL += factTableDDL;
-
-mondrianSchema += &quot;&lt;&#47;Cube&gt;&quot;;
-mondrianSchema += &quot;&lt;&#47;Schema&gt;&quot;;
-
-
-outputStr =  JSON.stringify(outputArray);</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+tableCreator(args);
+</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
+
+var facttable = getVariable(&quot;FACTTABLE&quot;,&quot;XXX&quot;);
+
+var tableCreator = function(_arr){
+    
+    var arr = _arr.slice();
+    
+	var sql = &quot;create database &quot; + facttable + &quot;;\n use &quot;+ facttable + &quot; ; \n create table &quot; + facttable +&quot; ( &quot; ;
+
+    var join=[];
+
+    for( var i in arr){
+        
+        var dimArray = arr[i];
+    
+        var dimension = dimArray.dimension;
+        var cols = dimArray.cols;
+        var name = dimArray.name;
+    
+        &#47;&#47; get the first member
+    
+        var row = dimension[0];
+    
+        for(var k in row){
+            if(k!==&quot;proportion&quot;){
+            
+                var c = row[k];
+                var s = k+ &quot; &quot;;
+                if(typeof(c) === &quot;number&quot;){
+                    s+=&quot; int &quot;;
+                }
+                else{
+                    s+=&quot; varchar(64) &quot;;
+                }
+                join.push(s);
+            }
+        
+        }
+    
+    }
+    
+    sql+=join.join(&quot;,&quot;)+&quot;, value numeric);&quot;;
+
+    generateRow(sql);
+
+&#47;&#47; iterate until we&apos;re finished with dimensions &lt;- commented out since we&apos;ve opted for a flat table
+&#47;&#47;if(arr.length &gt; 0){
+&#47;&#47;    tableCreator(arr);
+&#47;&#47;}
+    
+        
+    
+    
+}
+
+
 
 &#47;*  JSON2 *&#47;
 if(!this.JSON){this.JSON={};}
@@ -587,6 +649,192 @@ text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function
 if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
 throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
 
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
+        <rename>outputStr</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>597</xloc>
+      <yloc>231</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Output ddl</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;output&#47;${FACTTABLE}</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>ddl</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>outputStr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>828</xloc>
+      <yloc>231</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Schema</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+
+
+&#47;* NO NEED TO CHANGE ANYTHING HERE... *&#47;
+
+
+var args = JSON.parse(outputStr);
+
+outputStr = &quot;&quot;;
+
+var generateRow = function(row){
+	outputStr += row;    
+}
+
+
+schemaGenerator(args);
+</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var facttable = getVariable(&quot;FACTTABLE&quot;,&quot;XXX&quot;);
+
+
+var schemaGenerator = function(args){
+    
+    var capitalize = function(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+    
+    var schema = &lt;Schema name={facttable}&gt;&lt;Cube name={facttable}&gt;&lt;Table name={facttable}&#47;&gt;&lt;&#47;Cube&gt;&lt;&#47;Schema&gt;;
+        
+    for( var i in args){
+
+        var dimArray = args[i];
+
+        var name = capitalize(dimArray.name.substr(dimArray.name.indexOf(&quot;_&quot;)+1));
+        var dimension = dimArray.dimension[0];
+
+        var dimXml = &lt;Dimension name={name}&gt;&lt;Hierarchy hasAll=&quot;true&quot; allMemberName=&quot;All&quot;&gt;&lt;&#47;Hierarchy&gt;&lt;&#47;Dimension&gt;;
+
+        for(var key in dimension){
+            if(key !== &quot;proportion&quot;) {
+                dimXml.Hierarchy.appendChild(&lt;Level name={capitalize(key)} column={key} type={function(){return typeof( dimension[key] ) === &apos;number&apos;?&quot;Numeric&quot;:&quot;String&quot;}()}&gt;&lt;&#47;Level&gt;)
+            }
+        }
+
+        schema.Cube.appendChild(dimXml);
+
+    };
+    
+    &#47;&#47; Add Measures
+	schema.Cube.appendChild(&lt;Measure name=&quot;Value&quot; column=&quot;value&quot; aggregator=&quot;sum&quot; datatype=&quot;Integer&quot; formatString=&quot;#,###&quot;&#47;&gt;);
+
+    
+    generateRow(schema.toXMLString(2));
+    
+}
+
+
+
+
+
+
+&#47;*  JSON2 *&#47;
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n&lt;10?&apos;0&apos;+n:n;}
+if(typeof Date.prototype.toJSON!==&apos;function&apos;){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+&apos;-&apos;+
+f(this.getUTCMonth()+1)+&apos;-&apos;+
+f(this.getUTCDate())+&apos;T&apos;+
+f(this.getUTCHours())+&apos;:&apos;+
+f(this.getUTCMinutes())+&apos;:&apos;+
+f(this.getUTCSeconds())+&apos;Z&apos;:null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=&#47;[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,escapable=&#47;[\\\&quot;\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]&#47;g,gap,indent,meta={&apos;\b&apos;:&apos;\\b&apos;,&apos;\t&apos;:&apos;\\t&apos;,&apos;\n&apos;:&apos;\\n&apos;,&apos;\f&apos;:&apos;\\f&apos;,&apos;\r&apos;:&apos;\\r&apos;,&apos;&quot;&apos;:&apos;\\&quot;&apos;,&apos;\\&apos;:&apos;\\\\&apos;},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?&apos;&quot;&apos;+string.replace(escapable,function(a){var c=meta[a];return typeof c===&apos;string&apos;?c:&apos;\\u&apos;+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);})+&apos;&quot;&apos;:&apos;&quot;&apos;+string+&apos;&quot;&apos;;}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;&amp;&amp;typeof value.toJSON===&apos;function&apos;){value=value.toJSON(key);}
+if(typeof rep===&apos;function&apos;){value=rep.call(holder,key,value);}
+switch(typeof value){case&apos;string&apos;:return quote(value);case&apos;number&apos;:return isFinite(value)?String(value):&apos;null&apos;;case&apos;boolean&apos;:case&apos;null&apos;:return String(value);case&apos;object&apos;:if(!value){return&apos;null&apos;;}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)===&apos;[object Array]&apos;){length=value.length;for(i=0;i&lt;length;i+=1){partial[i]=str(i,value)||&apos;null&apos;;}
+v=partial.length===0?&apos;[]&apos;:gap?&apos;[\n&apos;+gap+
+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;]&apos;:&apos;[&apos;+partial.join(&apos;,&apos;)+&apos;]&apos;;gap=mind;return v;}
+if(rep&amp;&amp;typeof rep===&apos;object&apos;){length=rep.length;for(i=0;i&lt;length;i+=1){k=rep[i];if(typeof k===&apos;string&apos;){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?&apos;: &apos;:&apos;:&apos;)+v);}}}}
+v=partial.length===0?&apos;{}&apos;:gap?&apos;{\n&apos;+gap+partial.join(&apos;,\n&apos;+gap)+&apos;\n&apos;+
+mind+&apos;}&apos;:&apos;{&apos;+partial.join(&apos;,&apos;)+&apos;}&apos;;gap=mind;return v;}}
+if(typeof JSON.stringify!==&apos;function&apos;){JSON.stringify=function(value,replacer,space){var i;gap=&apos;&apos;;indent=&apos;&apos;;if(typeof space===&apos;number&apos;){for(i=0;i&lt;space;i+=1){indent+=&apos; &apos;;}}else if(typeof space===&apos;string&apos;){indent=space;}
+rep=replacer;if(replacer&amp;&amp;typeof replacer!==&apos;function&apos;&amp;&amp;(typeof replacer!==&apos;object&apos;||typeof replacer.length!==&apos;number&apos;)){throw new Error(&apos;JSON.stringify&apos;);}
+return str(&apos;&apos;,{&apos;&apos;:value});};}
+if(typeof JSON.parse!==&apos;function&apos;){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&amp;&amp;typeof value===&apos;object&apos;){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return&apos;\\u&apos;+
+(&apos;0000&apos;+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(&#47;^[\],:{}\s]*$&#47;.test(text.replace(&#47;\\(?:[&quot;\\\&#47;bfnrt]|u[0-9a-fA-F]{4})&#47;g,&apos;@&apos;).replace(&#47;&quot;[^&quot;\\\n\r]*&quot;|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?&#47;g,&apos;]&apos;).replace(&#47;(?:^|:|,)(?:\s*\[)+&#47;g,&apos;&apos;))){j=eval(&apos;(&apos;+text+&apos;)&apos;);return typeof reviver===&apos;function&apos;?walk({&apos;&apos;:j},&apos;&apos;):j;}
+throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
 
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>outputStr</name>
@@ -597,8 +845,71 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>323</xloc>
-      <yloc>333</yloc>
+      <xloc>597</xloc>
+      <yloc>319</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write schema</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;output&#47;${FACTTABLE}.mondrian</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>xml</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>outputStr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>828</xloc>
+      <yloc>319</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
