@@ -210,3 +210,12 @@ After running the transformation, we get this output:
 
 ![Schema workbench](http://www.webdetails.pt/cdg/cdg-workbench.png)
 
+
+Result
+------
+
+The result, after declaring this new datasource and registring the cube in
+mondrian, is a new cube that we can use.
+
+![Saiku](http://www.webdetails.pt/cdg/cdg-saiku.png)
+

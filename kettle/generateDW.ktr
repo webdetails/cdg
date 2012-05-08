@@ -168,10 +168,7 @@ var countries = [
   {countryName: &quot;Outros&quot;, proportion: 5}  
 ];
 
-var cores = [
-  {corName: &quot;Verde&quot;, proportion: 30},  
-  {corName: &quot;Vermelho&quot;, proportion: 70}  
-];
+
 
 
 &#47;* CONFIGURE THE DATE DIMENSION. *&#47;
@@ -196,14 +193,14 @@ range(2000,2012).map(function(year){
 ;
 
 
-&#47;* MAKE THE FINAL CONFIGIURATION. DIMENSIONS CAN EITHER BE SNAPSHOT OR REGULAR BREAKDOWNS *&#47; 
+&#47;* MAKE THE FINAL CONFIGURATION. DIMENSIONS CAN EITHER BE SNAPSHOT OR REGULAR BREAKDOWNS *&#47; 
 
 var outputArray = [
     
     {name: &quot;Date&quot;, dimension: dateDim, toBreakdown: false, increment: 0.05 }, 
     {name: &quot;Provices&quot;, dimension: provinces, toBreakdown: true },
     {name: &quot;Countries&quot;, dimension: countries, toBreakdown: true },
-    {name: &quot;Dates&quot;, dimension: gender, toBreakdown: true } 
+    {name: &quot;Gender&quot;, dimension: gender, toBreakdown: true } 
  
  ]
 
