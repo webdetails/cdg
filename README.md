@@ -60,6 +60,26 @@ There are only 2 things that need to be changed:
 2. In _Dimension Info_ you configure the transformation parameters
 
 
+Change the parameters you want (or just run with the default), run the
+transformation, and 3 files will appear in the output directory: database and
+table ddl, insert scripts and [Mondrian](http://mondrian.pentaho.org) schema
+file.
+
+
+Configuring totals
+------------------
+
+Inside the _Dimension Info_ step you'll find a mention to the total:
+
+
+	/* SET THE APPROXIMATE TOTAL FOR THE VALUES */
+	var total = 5000;
+
+
+This will be _approximate_ total for all the breakdowns. We need to specify
+something within the order of magnitude of what we're trying to show. CDG will
+then take that value and randomize it.
+
 
 
 
