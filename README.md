@@ -219,3 +219,12 @@ mondrian, is a new cube that we can use.
 
 ![Saiku](http://www.webdetails.pt/cdg/cdg-saiku.png)
 
+
+Issues, bugs and feature requests
+---------------------------------
+
+
+In order to report bugs, issues or feature requests, please use the [Webdetails CDG Project Page](http://redmine.webdetails.org/projects/cdg/issues)
+
+
+
