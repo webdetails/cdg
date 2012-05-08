@@ -15,6 +15,10 @@ want, CDG will randomize data within certain parameters and output 3 different t
 * Mondrian schema file to be used within pentaho
 
 
+While most of the documentation mentions the usage within the scope of
+[Pentaho](http://www.pentaho.com) there's absolutely nothing that prevents the
+resulting database to be used in different contexts.
+
 
 Motivation
 ----------
@@ -115,7 +119,7 @@ only one.
 
 There's a special property in there called _proportion_. That will be used by
 CDG to do the breakdown of the total. In the example, _roughly_ 30% of the
-total will be assigned to Italians. In all aspects of the code there's a random
+total will be assigned to Italians and so on. In all aspects of the code there's a random
 factor.
 
 
