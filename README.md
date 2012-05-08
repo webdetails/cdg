@@ -227,4 +227,9 @@ Issues, bugs and feature requests
 In order to report bugs, issues or feature requests, please use the [Webdetails CDG Project Page](http://redmine.webdetails.org/projects/cdg/issues)
 
 
+License
+-------
+
+CDG is licensed under the [MPLv2](http://www.mozilla.org/MPL/2.0/) license.
+
 
