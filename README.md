@@ -111,6 +111,11 @@ Here's a sample dimension definition:
 	];
 
 
+_The sample provided in CDG is in Portuguese to specifically test character
+encoding support. The generated files are in UTF-8 and we recommend always
+using utf-8 in the database too_
+
+
 By defining this object, CDG will create a dimension with 8 members and one
 level called _countryName_. You could have other properties in there and CDG
 would create a mondrian schema with different levels. The provided example has
@@ -119,8 +124,73 @@ only one.
 
 There's a special property in there called _proportion_. That will be used by
 CDG to do the breakdown of the total. In the example, _roughly_ 30% of the
-total will be assigned to Italians and so on. In all aspects of the code there's a random
-factor.
+total will be assigned to Italians and so on. In all aspects of the code
+there's a random factor in place.
+
+
+Configuring Date Dimension
+--------------------------
+
+The date dimension is always a specific case, since most of the times acts as a
+_snapshot dimension_. 
+
+
+Since configuring all possible members of this dimension would be very time
+consuming, we provide an utility function that generates all the dates between
+2000 and 2012 down to the month. This is standard javascript, so feel free to
+change this function either to change the date range, month names or even
+adding the day level (be aware that adding the day level will substantially increase
+the number of values in the fact table)
+
+
+	/* CONFIGURE THE DATE DIMENSION. */
+
+	var dateDim = [];
+
+	var months = [
+		[1,"Jan","Janeiro"],    [2,"Fev","Fevereiro"],    [3,"Mar","Março"],    [4,"Abr","Abril"],
+		[5,"Mai","Maio"],    [6,"Jun","Junho"],    [7,"Jul","Julho"],    [8,"Ago","Agosto"],
+		[9,"Set","Setembro"],    [10,"Out","Outubro"],    [11,"Nov","Novembro"],  
+		[12,"Dec","Dezembro"]
+	];
+
+	range(2000,2012).map(function(year){
+		range(0,12).map(function(month){
+			var m = months[month];
+			dateDim.push(
+				{"year":year ,"monthNo": m[0], "monthAbbrev":m[1], "monthDesc": m[2]}
+			);
+		});
+	});
+	;
+
+
+Final configuration
+-------------------
+
+In the end of the script there's the final configuration that will be used by CDG:
+
+
+	/* MAKE THE FINAL CONFIGURATION. DIMENSIONS CAN EITHER BE SNAPSHOT OR REGULAR BREAKDOWNS */ 
+
+	var outputArray = [
+		
+		{name: "Date", dimension: dateDim, toBreakdown: false, increment: 0.05 }, 
+		{name: "Provices", dimension: provinces, toBreakdown: true },
+		{name: "Countries", dimension: countries, toBreakdown: true },
+		{name: "Dates", dimension: gender, toBreakdown: true } 
+	 
+	 ]
+
+
+In here we define the names and types of the dimension. The property of _toBreakdown_ should be _true_ for normal dimensions and _false_ for snapshot dimensions. If it's a snapshot dimension, you need to specify the _increment_ property. This value of 0.05 basically means that we'll have _roughly_ 5% increase each month.
+
+
+You can then run the transformation.
+
+
+Output
+------
 
 
 
