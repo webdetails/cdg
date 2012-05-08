@@ -43,5 +43,23 @@ to build scenarios where the end consumer can feel comfortable with.
 Usage
 -----
 
+Version 1 of CDG is called by editing a kettle transformation. In the source
+you'll find a _src_ directory but that is our "development area". The code you
+need to use is inside kettle.
+
+
+Once you open the transformation in `kettle/generateDW.ktr` you'll see the following:
+
+![CDG kettle transformation](http://www.webdetails.pt/cdg/cdg-kettle.png)
+
+
+There are only 2 things that need to be changed:
+
+1. In transformation properties you defined the name of the database and fact table
+
+2. In _Dimension Info_ you configure the transformation parameters
+
+
+
 
 
