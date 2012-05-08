@@ -41,7 +41,8 @@ solution we're demonstrating.
 
 
 So we decided to build CDG - a datawarehouse generator that we can quickly use
-to build scenarios where the end consumer can feel comfortable with.
+to build scenarios where the end consumer can feel comfortable with, written
+with [Kettle](http://kettle.pentaho.org/)
 
 
 Usage
@@ -192,7 +193,20 @@ You can then run the transformation.
 Output
 ------
 
+After running the transformation, we get this output:
+
+	cdg/kettle/output
+	├── cdgsample.ddl
+	├── cdgsample.mondrian.xml
+	`── cdgsample.sql
 
 
 
+
+1. A _ddl_ file to create the database and the table
+2. A file with _sql_ inserts to populate the datawarehouse
+3. A mondrian schema file to use within mondrian / import to pentaho
+
+
+![Schema workbench](http://www.webdetails.pt/cdg/cdg-workbench.png)
 
