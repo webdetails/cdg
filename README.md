@@ -66,7 +66,7 @@ table ddl, insert scripts and [Mondrian](http://mondrian.pentaho.org) schema
 file.
 
 
-Configuring totals
+Configuring Totals
 ------------------
 
 Inside the _Dimension Info_ step you'll find a mention to the total:
@@ -79,6 +79,45 @@ Inside the _Dimension Info_ step you'll find a mention to the total:
 This will be _approximate_ total for all the breakdowns. We need to specify
 something within the order of magnitude of what we're trying to show. CDG will
 then take that value and randomize it.
+
+
+Configuring Dimensions
+----------------------
+
+
+In the same file you configure the dimensions. You can have as much as you
+want, just paying attention to the fact that if you use a lot of dimensions /
+high cardinality we can quickly end up with a *huge* database. While there's
+nothing particularly wrong with that, it's then up to you to do specific
+optimizations like indexes or even aggregate tables. That's outside the scope
+of CDG.
+
+
+Here's a sample dimension definition:
+
+	var countries = [
+	  {countryName: "Italianos", proportion: 30},  
+	  {countryName: "Portugueses", proportion: 18},  
+	  {countryName: "Alemães", proportion: 12},  
+	  {countryName: "Espanhóis", proportion: 10},  
+	  {countryName: "Japoneses", proportion: 15},  
+	  {countryName: "Coreanos", proportion: 8},  
+	  {countryName: "Chineses", proportion: 3},  
+	  {countryName: "Outros", proportion: 5}  
+	];
+
+
+By defining this object, CDG will create a dimension with 8 members and one
+level called _countryName_. You could have other properties in there and CDG
+would create a mondrian schema with different levels. The provided example has
+only one.
+
+
+There's a special property in there called _proportion_. That will be used by
+CDG to do the breakdown of the total. In the example, _roughly_ 30% of the
+total will be assigned to Italians. In all aspects of the code there's a random
+factor.
+
 
 
 

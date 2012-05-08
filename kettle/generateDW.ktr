@@ -153,8 +153,8 @@ var provinces = [
 ];
 
 var gender = [
-  {genderName: &quot;Homem&quot;, proportion: 45},  
-  {genderName: &quot;Mulher&quot;, proportion: 55}  
+  {genderName: &quot;Homem&quot;, genderType: &quot;M&quot;, proportion: 45},  
+  {genderName: &quot;Mulher&quot;, genderType:&quot;F&quot;, proportion: 55}  
 ];
 
 var countries = [
@@ -354,7 +354,7 @@ var schemaGenerator = function(args){
     };
     
     &#47;&#47; Add Measures
-	schema.Cube.appendChild(&lt;Measure name=&quot;Value&quot; column=&quot;value&quot; aggregator=&quot;sum&quot; datatype=&quot;Integer&quot; formatString=&quot;#,###&quot;&#47;&gt;);
+	schema.Cube.appendChild(&lt;Measure name=&quot;Value&quot; column=&quot;value&quot; aggregator=&quot;sum&quot; datatype=&quot;Numeric&quot; formatString=&quot;#,###&quot;&#47;&gt;);
 
     
     generateRow(schema.toXMLString(2));
