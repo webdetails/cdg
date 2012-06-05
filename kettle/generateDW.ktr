@@ -2,17 +2,22 @@
 <transformation>
   <info>
     <name>CDG</name>
-    <description/>
+    <description>Generates data for prototypes</description>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
+    <trans_status>1</trans_status>
     <directory>&#47;</directory>
     <parameters>
         <parameter>
             <name>FACTTABLE</name>
             <default_value>cdgsample</default_value>
-            <description/>
+            <description>Name of fact table to be created (which will be the same for the database.)</description>
+        </parameter>
+        <parameter>
+            <name>QUOTESTYLE</name>
+            <default_value>&quot;</default_value>
+            <description>What quoting style to use when outputing INSERTs into SQL file. &quot; for MySQL and &apos; for PostgreSQL.</description>
         </parameter>
     </parameters>
     <log>
@@ -76,11 +81,14 @@
       <note>Configure fact table name in transformation properties. 
 Defaults to &quot;myfact&quot;.
 
+Configure SQL quoting style in transformation properties.
+Defaults to &quot;. Use &quot; for MySQL and &apos; for PostgreSQL.
+
 Configure the Dimension Info step for the dimensions</note>
-      <xloc>57</xloc>
-      <yloc>21</yloc>
-      <width>330</width>
-      <heigth>74</heigth>
+      <xloc>53</xloc>
+      <yloc>13</yloc>
+      <width>339</width>
+      <heigth>122</heigth>
       <fontname>Arial</fontname>
       <fontsize>10</fontsize>
       <fontbold>N</fontbold>
@@ -98,7 +106,7 @@ Configure the Dimension Info step for the dimensions</note>
     </notepad>
   </notepads>
   <order>
-  <hop> <from>Generate dummy row</from><to>Dimension Info *CONFIGURE ME*</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Randomize data</to><enabled>Y</enabled> </hop>  <hop> <from>Randomize data</from><to>Output inserts</to><enabled>Y</enabled> </hop>  <hop> <from>Generate table ddl</from><to>Output ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate table ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Schema</from><to>Write schema</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate Schema</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Generate dummy row</from><to>Dimension Info *CONFIGURE ME*</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Randomize data</to><enabled>Y</enabled> </hop>  <hop> <from>Generate table ddl</from><to>Output ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate table ddl</to><enabled>Y</enabled> </hop>  <hop> <from>Generate Schema</from><to>Write schema</to><enabled>Y</enabled> </hop>  <hop> <from>Dimension Info *CONFIGURE ME*</from><to>Generate Schema</to><enabled>Y</enabled> </hop>  <hop> <from>Randomize data</from><to>Set Quote Style</to><enabled>Y</enabled> </hop>  <hop> <from>Set Quote Style</from><to>Output inserts</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Dimension Info *CONFIGURE ME*</name>
     <type>ScriptValueMod</type>
@@ -110,7 +118,6 @@ Configure the Dimension Info step for the dimensions</note>
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
@@ -278,8 +285,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>286</xloc>
-      <yloc>134</yloc>
+      <xloc>328</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -295,7 +302,6 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -402,8 +408,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>597</xloc>
-      <yloc>319</yloc>
+      <xloc>577</xloc>
+      <yloc>350</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -434,8 +440,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     <limit>1</limit>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>134</yloc>
+      <xloc>79</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -451,7 +457,6 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -571,8 +576,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>597</xloc>
-      <yloc>231</yloc>
+      <xloc>577</xloc>
+      <yloc>258</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -634,8 +639,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
-      <yloc>231</yloc>
+      <xloc>827</xloc>
+      <yloc>258</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -697,8 +702,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
-      <yloc>134</yloc>
+      <xloc>827</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -714,7 +719,6 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -842,8 +846,8 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>598</xloc>
-      <yloc>134</yloc>
+      <xloc>577</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -905,8 +909,38 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
-      <yloc>319</yloc>
+      <xloc>827</xloc>
+      <yloc>350</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Quote Style</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>outputStr</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>&quot;</replace_string>
+        <replace_by_string>${QUOTESTYLE}</replace_by_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>702</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
