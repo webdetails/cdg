@@ -348,7 +348,7 @@ var schemaGenerator = function(args){
 
         for(var key in dimension){
             if(key !== &quot;proportion&quot;) {
-                dimXml.Hierarchy.appendChild(&lt;Level name={capitalize(key)} column={key} type={function(){return typeof( dimension[key] ) === &apos;number&apos;?&quot;Numeric&quot;:&quot;String&quot;}()}&gt;&lt;&#47;Level&gt;)
+                dimXml.Hierarchy.appendChild(&lt;Level name={capitalize(key)} column={key} type={function(){return typeof( dimension[key] ) === &apos;number&apos;?&quot;Integer&quot;:&quot;String&quot;}()}&gt;&lt;&#47;Level&gt;)
             }
         }
 
@@ -853,6 +853,36 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
     </step>
 
   <step>
+    <name>Set Quote Style</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>outputStr</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>&quot;</replace_string>
+        <replace_by_string>${QUOTESTYLE}</replace_by_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>702</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Write schema</name>
     <type>TextFileOutput</type>
     <description/>
@@ -911,36 +941,6 @@ throw new SyntaxError(&apos;JSON.parse&apos;);};}}());
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>827</xloc>
       <yloc>350</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Quote Style</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>outputStr</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>&quot;</replace_string>
-        <replace_by_string>${QUOTESTYLE}</replace_by_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
-      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
