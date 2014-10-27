@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>generateAndLoadDW</name>
+    <description>Clean Job</description>
+    <extended_description/>
+    <job_version/>
+    <job_status>0</job_status>
+  <directory>&#x2f;</directory>
+  <created_user>-</created_user>
+  <created_date>2013&#x2f;07&#x2f;04 18&#x3a;48&#x3a;22.641</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2013&#x2f;07&#x2f;04 18&#x3a;48&#x3a;22.641</modified_date>
+    <parameters>
+        <parameter>
+            <name>&#x23;cpk.cache.isEnabled</name>
+            <default_value>false</default_value>
+            <description>Enables&#x2f;disables caching of the results. Remove &#x27;&#x23;&#x27; to use variable.&#xa;</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.cache.timeToLiveSeconds</name>
+            <default_value>3600</default_value>
+            <description>For how many seconds a result will be cached. Setting this value to 0 means the result will be cached &#x22;forever&#x22;. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.executeAtStart</name>
+            <default_value/>
+            <description>Whether the transformation is to be executed when the plugin is initialized. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.plugin.id</name>
+            <default_value/>
+            <description>The id of the plugin. This value is automatically set at runtime if  &#x27;&#x23;&#x27; is removed from variable name.&#xa;</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.response.attachmentName</name>
+            <default_value/>
+            <description>The attachment name used when downloading a file from a result.  Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.response.download</name>
+            <default_value>false</default_value>
+            <description>Whether to &#x28;or not&#x29; mark the http reponse body as an attachment. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.response.kettleOutput</name>
+            <default_value>Infered</default_value>
+            <description>The output format to be used by default. Possible values&#x3a; Infered, Json, SingleCell, ResultFiles, ResultOnly. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.response.mimeType</name>
+            <default_value/>
+            <description>The mimeType of the http response. If this value is not set, the plugin will try to determine it from the file extension. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.result.stepName</name>
+            <default_value>OUTPUT</default_value>
+            <description>The default output step where the rows will be fetched for the result. Remove &#x27;&#x23;&#x27; to use variable.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.session.&#x5b;sessionVarName&#x5d;</name>
+            <default_value/>
+            <description>The value of session variable named &#x5b;sessionVarName&#x5d;. This value is automatically injected here at runtime if &#x27;&#x23;&#x27; is removed from variable name.&#xa;</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.session.roles</name>
+            <default_value/>
+            <description>The roles of the username executing this transformation. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.session.username</name>
+            <default_value/>
+            <description>The username that is executing this transformation. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.solution.system.dir</name>
+            <default_value>&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;..</default_value>
+            <description>The pentaho-solutions folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
+        </parameter>
+        <parameter>
+            <name>&#x23;cpk.webapp.dir</name>
+            <default_value>&#x24;&#x7b;cpk.solution.system.dir&#x7d;&#x2f;..&#x2f;..&#x2f;tomcat&#x2f;webapps&#x2f;pentaho</default_value>
+            <description>The webapp folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
+        </parameter>
+        <parameter>
+            <name>_datasourcesDir</name>
+            <default_value>&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;stage</default_value>
+            <description>Folder with the scripts are generated - _importConnection.kjb also needs this variable.</description>
+        </parameter>
+        <parameter>
+            <name>cpk.plugin.dir</name>
+            <default_value>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;..&#x2f;..</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dateRange</name>
+            <default_value>2014-2015</default_value>
+            <description>format&#x3a; &#x3c;year from&#x3e;-&#x3c;year_to&#x3e;</description>
+        </parameter>
+        <parameter>
+            <name>db_ConnectionURL</name>
+            <default_value>jdbc&#x3a;h2&#x3a;file&#x3a;&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;stage&#x2f;&#x24;&#x7b;dwName&#x7d;&#x3b;DB_CLOSE_DELAY&#x3d;-1&#x3b;MVCC&#x3d;TRUE&#x3b;FILE_LOCK&#x3d;NO&#x3b;DATABASE_TO_UPPER&#x3d;FALSE</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_driver</name>
+            <default_value>org.h2.Driver</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_engine</name>
+            <default_value>H2</default_value>
+            <description>H2 &#x28;default&#x29;</description>
+        </parameter>
+        <parameter>
+            <name>db_password</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_user</name>
+            <default_value>H2</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dimensions</name>
+            <default_value>&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;Provinces&#x22;,&#x22;dimension&#x22;&#x3a;&#x5b;&#x7b;&#x22;provinceName&#x22;&#x3a;&#x22;Acre&#x22;,&#x22;provinceId&#x22;&#x3a;&#x22;AC&#x22;,&#x22;proportion&#x22;&#x3a;3.7&#x7d;,&#x7b;&#x22;provinceName&#x22;&#x3a;&#x22;Alagoas&#x22;,&#x22;provinceId&#x22;&#x3a;&#x22;AL&#x22;,&#x22;proportion&#x22;&#x3a;3.7&#x7d;,&#x7b;&#x22;provinceName&#x22;&#x3a;&#x22;Amap&#xe1;&#x22;,&#x22;provinceId&#x22;&#x3a;&#x22;AP&#x22;,&#x22;proportion&#x22;&#x3a;3.7&#x7d;,&#x7b;&#x22;provinceName&#x22;&#x3a;&#x22;Amazonas&#x22;,&#x22;provinceId&#x22;&#x3a;&#x22;AM&#x22;,&#x22;proportion&#x22;&#x3a;3.7&#x7d;&#x5d;,&#x22;toBreakdown&#x22;&#x3a;true&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;Countries&#x22;,&#x22;dimension&#x22;&#x3a;&#x5b;&#x7b;&#x22;countryName&#x22;&#x3a;&#x22;Italianos&#x22;,&#x22;proportion&#x22;&#x3a;30&#x7d;,&#x7b;&#x22;countryName&#x22;&#x3a;&#x22;Portugueses&#x22;,&#x22;proportion&#x22;&#x3a;18&#x7d;&#x5d;,&#x22;toBreakdown&#x22;&#x3a;true&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;Gender&#x22;,&#x22;dimension&#x22;&#x3a;&#x5b;&#x7b;&#x22;genderName&#x22;&#x3a;&#x22;Homem&#x22;,&#x22;genderType&#x22;&#x3a;&#x22;M&#x22;,&#x22;proportion&#x22;&#x3a;45&#x7d;,&#x7b;&#x22;genderName&#x22;&#x3a;&#x22;Mulher&#x22;,&#x22;genderType&#x22;&#x3a;&#x22;F&#x22;,&#x22;proportion&#x22;&#x3a;55&#x7d;&#x5d;,&#x22;toBreakdown&#x22;&#x3a;true&#x7d;&#x5d;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dwName</name>
+            <default_value>test</default_value>
+            <description>the DW name</description>
+        </parameter>
+        <parameter>
+            <name>loadDW</name>
+            <default_value>N</default_value>
+            <description>Y&#x3d;import &#x2f; N&#x3d;don&#x27;t import &#x28;just generate the files&#x29;</description>
+        </parameter>
+        <parameter>
+            <name>measures</name>
+            <default_value>&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;a&#x22;,&#x22;type&#x22;&#x3a;&#x22;integer&#x22;,&#x22;min&#x22;&#x3a;0,&#x22;max&#x22;&#x3a;20&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;b&#x22;,&#x22;type&#x22;&#x3a;&#x22;numeric&#x22;,&#x22;min&#x22;&#x3a;20,&#x22;max&#x22;&#x3a;70&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;value&#x22;,&#x22;type&#x22;&#x3a;&#x22;numeric&#x22;,&#x22;min&#x22;&#x3a;2000,&#x22;max&#x22;&#x3a;70000&#x7d;&#x5d;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>model</name>
+            <default_value>DW_star</default_value>
+            <description>DW&#x3d;Plain table &#x7c; DW_star&#x3d;Star model</description>
+        </parameter>
+        <parameter>
+            <name>pentahoLogin</name>
+            <default_value>admin</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>pentahoPassword</name>
+            <default_value>password</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>pentahoUrl</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>prepend_dimname</name>
+            <default_value>false</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>settings</name>
+            <default_value>&#x5b;&#x5d;</default_value>
+            <description>db settings &#x28;JSON&#x29;</description>
+        </parameter>
+        <parameter>
+            <name>total</name>
+            <default_value>500</default_value>
+            <description>approximate total for the values</description>
+        </parameter>
+    </parameters>
+  <connection>
+    <name>generic_connection</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database/>
+    <port>1521</port>
+    <username>&#x24;&#x7b;db_user&#x7d;</username>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;db_driver&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;db_ConnectionURL&#x7d;</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+    <slaveservers>
+    </slaveservers>
+<job-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>START_JOB_ENTRY</id><enabled>N</enabled><name>START_JOB_ENTRY</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></job-log-table>
+<jobentry-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>JOBENTRYNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>RESULT</id><enabled>Y</enabled><name>RESULT</name></field><field><id>NR_RESULT_ROWS</id><enabled>Y</enabled><name>NR_RESULT_ROWS</name></field><field><id>NR_RESULT_FILES</id><enabled>Y</enabled><name>NR_RESULT_FILES</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field><field><id>COPY_NR</id><enabled>N</enabled><name>COPY_NR</name></field></jobentry-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+   <pass_batchid>N</pass_batchid>
+   <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>34</xloc>
+      <yloc>0</yloc>
+      </entry>
+    <entry>
+      <name>generateDWJob</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;generateDWJob.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>_datasourcesDir</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;_datasourcesDir&#x7d;</value>
+            </parameter>            <parameter>            <name>dateRange</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dateRange&#x7d;</value>
+            </parameter>            <parameter>            <name>dbEngine</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_engine&#x7d;</value>
+            </parameter>            <parameter>            <name>dimensions</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dimensions&#x7d;</value>
+            </parameter>            <parameter>            <name>dwName</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dwName&#x7d;</value>
+            </parameter>            <parameter>            <name>measures</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;measures&#x7d;</value>
+            </parameter>            <parameter>            <name>prepend_dimname</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;prepend_dimname&#x7d;</value>
+            </parameter>            <parameter>            <name>total</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;total&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>221</xloc>
+      <yloc>62</yloc>
+      </entry>
+    <entry>
+      <name>Delete filenames from result</name>
+      <description/>
+      <type>DELETE_RESULT_FILENAMES</type>
+      <foldername/>
+      <specify_wildcard>N</specify_wildcard>
+      <wildcard/>
+      <wildcardexclude/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>951</xloc>
+      <yloc>261</yloc>
+      </entry>
+    <entry>
+      <name>Delete DW folder</name>
+      <description/>
+      <type>DELETE_FOLDERS</type>
+      <arg_from_previous>N</arg_from_previous>
+      <success_condition>success_if_no_errors</success_condition>
+      <limit_folders>10</limit_folders>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;_datasourcesDir&#x7d;&#x2f;&#x24;&#x7b;dwName&#x7d;</name>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>221</xloc>
+      <yloc>261</yloc>
+      </entry>
+    <entry>
+      <name>Abort job</name>
+      <description/>
+      <type>ABORT</type>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>67</xloc>
+      <yloc>261</yloc>
+      </entry>
+    <entry>
+      <name>loadDatabase</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;_loadDatabase.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>_datasourcesDir</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;_datasourcesDir&#x7d;</value>
+            </parameter>            <parameter>            <name>db_ConnectionURL</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_ConnectionURL&#x7d;</value>
+            </parameter>            <parameter>            <name>db_driver</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_driver&#x7d;</value>
+            </parameter>            <parameter>            <name>db_engine</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_engine&#x7d;</value>
+            </parameter>            <parameter>            <name>db_password</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_password&#x7d;</value>
+            </parameter>            <parameter>            <name>db_user</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_user&#x7d;</value>
+            </parameter>            <parameter>            <name>dwName</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dwName&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>523</xloc>
+      <yloc>62</yloc>
+      </entry>
+    <entry>
+      <name>addDatasourcesToServer</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;_addDatasourcesToServer.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>connection_name</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dwName&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoLogin</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoLogin&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoPassword</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoPassword&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoUrl</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoUrl&#x7d;</value>
+            </parameter>            <parameter>            <name>_datasourcesDir</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;_datasourcesDir&#x7d;</value>
+            </parameter>            <parameter>            <name>db_ConnectionURL</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_ConnectionURL&#x7d;</value>
+            </parameter>            <parameter>            <name>db_driver</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_driver&#x7d;</value>
+            </parameter>            <parameter>            <name>db_password</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_password&#x7d;</value>
+            </parameter>            <parameter>            <name>db_user</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;db_user&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>727</xloc>
+      <yloc>62</yloc>
+      </entry>
+    <entry>
+      <name>Drop database &#x24;&#x7b;dwName&#x7d;</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DROP DATABASE &#x24;&#x7b;dwName&#x7d;&#x3b;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>generic_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>523</xloc>
+      <yloc>261</yloc>
+      </entry>
+    <entry>
+      <name>Delete datasources from server</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;_delete_datasources.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>connection_name</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;dwName&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoLogin</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoLogin&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoPassword</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoPassword&#x7d;</value>
+            </parameter>            <parameter>            <name>pentahoUrl</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;pentahoUrl&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>727</xloc>
+      <yloc>261</yloc>
+      </entry>
+    <entry>
+      <name>loadDW &#x3f; </name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>&#x24;&#x7b;loadDW&#x7d;</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>Y</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>362</xloc>
+      <yloc>62</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>363</xloc>
+      <yloc>174</yloc>
+      </entry>
+    <entry>
+      <name>fix_variables</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;_fix_variables.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>34</xloc>
+      <yloc>62</yloc>
+      </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>generateDWJob</from>
+      <to>Delete DW folder</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete DW folder</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>loadDatabase</from>
+      <to>addDatasourcesToServer</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>loadDatabase</from>
+      <to>Drop database &#x24;&#x7b;dwName&#x7d;</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Drop database &#x24;&#x7b;dwName&#x7d;</from>
+      <to>Delete DW folder</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>addDatasourcesToServer</from>
+      <to>Delete datasources from server</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete datasources from server</from>
+      <to>Drop database &#x24;&#x7b;dwName&#x7d;</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>addDatasourcesToServer</from>
+      <to>Delete filenames from result</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>generateDWJob</from>
+      <to>loadDW &#x3f; </to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>loadDW &#x3f; </from>
+      <to>loadDatabase</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>loadDW &#x3f; </from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fix_variables</from>
+      <to>generateDWJob</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>fix_variables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+    <notepad>
+      <note>CLEAN UP                                                                                                                                                                                                                     </note>
+      <xloc>178</xloc>
+      <yloc>218</yloc>
+      <width>702</width>
+      <heigth>23</heigth>
+      <fontname>Microsoft Sans Serif</fontname>
+      <fontsize>8</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>128</backgroundcolorred>
+      <backgroundcolorgreen>255</backgroundcolorgreen>
+      <backgroundcolorblue>255</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>1. drop database&#xd;&#xa;The failure of &#x22;loadDatabase&#x22; doesn&#x27;t mean that the DB was not created.&#xd;&#xa;&#x28;For instance&#x3a; the etl creates the database, but fails when loading data,&#xd;&#xa;Therefore the red arrow goes to the &#x22;Drop the Database&#x22; entry job.&#xd;&#xa;&#xd;&#xa;2. delete datasources from server&#xd;&#xa;The failure of &#x22;addDatasourcesToServer&#x22; doesn&#x27;t mean that the ETL didn&#x27;tadd any datasource.&#xd;&#xa;&#x28;For instance&#x3a; the etl adds the JNDI datasources, but fails when loads the mondrian schema&#x29;&#xd;&#xa;Therefore the red arrow goes to the &#x22;Delete the DS&#x22; entry job.</note>
+      <xloc>55</xloc>
+      <yloc>392</yloc>
+      <width>461</width>
+      <heigth>127</heigth>
+      <fontname>Microsoft Sans Serif</fontname>
+      <fontsize>8</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>see note &#x28;1&#x29;</note>
+      <xloc>547</xloc>
+      <yloc>116</yloc>
+      <width>67</width>
+      <heigth>23</heigth>
+      <fontname/>
+      <fontsize>-1</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>see note &#x28;2&#x29;</note>
+      <xloc>752</xloc>
+      <yloc>117</yloc>
+      <width>67</width>
+      <heigth>23</heigth>
+      <fontname/>
+      <fontsize>-1</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+  </notepads>
+<attributes><group><name>JobRestart</name>
+<attribute><key>UniqueConnections</key>
+<value>N</value>
+</attribute></group></attributes>
+
+</job>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>_add_jdbc_datasource</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#x2f;</directory>
+    <parameters>
+        <parameter>
+            <name>connection_name</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_ConnectionURL</name>
+            <default_value>jdbc&#x3a;h2&#x3a;file&#x3a;&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;stage&#x2f;&#x24;&#x7b;connection_name&#x7d;&#x3b;DB_CLOSE_DELAY&#x3d;-1&#x3b;MVCC&#x3d;TRUE&#x3b;FILE_LOCK&#x3d;NO&#x3b;DATABASE_TO_UPPER&#x3d;FALSE</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_driver</name>
+            <default_value>org.h2.Driver</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_password</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>db_user</name>
+            <default_value>H2</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>pentahoLogin</name>
+            <default_value>admin</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>pentahoPassword</name>
+            <default_value>password</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>pentahoUrl</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho</default_value>
+            <description/>
+        </parameter>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user/>
+  <created_date>2014&#x2f;02&#x2f;14 09&#x3a;25&#x3a;56.563</created_date>
+  <modified_user/>
+  <modified_date>2014&#x2f;02&#x2f;14 09&#x3a;25&#x3a;56.563</modified_date>
+  </info>
+  <notepads>
+    <notepad>
+      <note>Sample JSON with datasource definition&#xd;&#xa;&#xd;&#xa;&#x7b;&#x22;connectSql&#x22;&#x3a;&#x22;&#x22;,&#x22;databaseName&#x22;&#x3a;&#x22;SampleData&#x22;,&#x22;databasePort&#x22;&#x3a;&#x22;9001&#x22;,&#x22;hostname&#x22;&#x3a;&#x22;localhost&#x22;,&#xd;&#xa;&#x22;name&#x22;&#x3a;&#x22;SampleData&#x22;,&#x22;password&#x22;&#x3a;&#x22;password&#x22;,&#x22;username&#x22;&#x3a;&#x22;pentaho_user&#x22;,&#xd;&#xa;&#x22;attributes&#x22;&#x3a;&#x7b;&#x7d;,&#x22;connectionPoolingProperties&#x22;&#x3a;&#x7b;&#x7d;,&#x22;extraOptions&#x22;&#x3a;&#x7b;&#x7d;,&#x22;accessType&#x22;&#x3a;&#x22;NATIVE&#x22;,&#xd;&#xa;&#x22;databaseType&#x22;&#x3a;&#x7b;&#x22;defaultDatabasePort&#x22;&#x3a;9001,&#x22;extraOptionsHelpUrl&#x22;&#x3a;&#x22;http&#x3a;&#x2f;&#x2f;hsqldb.sourceforge.net&#x2f;doc&#x2f;guide&#x2f;ch04.html&#x23;N109DA&#x22;,&#xd;&#xa;&#x22;name&#x22;&#x3a;&#x22;Hypersonic&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;HYPERSONIC&#x22;,&#x22;supportedAccessTypes&#x22;&#x3a; &#x5b;&#x22;NATIVE&#x22;,&#x22;ODBC&#x22;,&#x22;JNDI&#x22;&#x5d;&#x7d;&#x7d;</note>
+      <xloc>17</xloc>
+      <yloc>358</yloc>
+      <width>711</width>
+      <heigth>109</heigth>
+      <fontname>Microsoft Sans Serif</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>&#x22;generic database&#x22; connection&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x5b;POST&#x5d; &#x2f;pentaho&#x2f;plugin&#x2f;data-access&#x2f;api&#x2f;connection&#x2f;add&#xd;&#xa;&#xd;&#xa;form params&#x3a;&#xd;&#xa;&#xd;&#xa;    name&#x3a; &#x22;nome da DB conn&#x22;&#xd;&#xa;    password&#x3a; &#x22;a password&#x22;&#xd;&#xa;    username&#x3a; &#x22;o username&#x22;&#xd;&#xa;&#xd;&#xa;    attributes&#x3a; &#x7b;&#xd;&#xa;&#xd;&#xa;    CUSTOM_DRIVER_CLASS&#x3a; &#x22;o driver para a DB conn&#x22;&#xd;&#xa;    CUSTOM_URL&#x3a; &#x22;o custom url para a DB conn&#x22;&#xd;&#xa;&#xd;&#xa;    &#x7d;&#xd;&#xa;&#xd;&#xa;    accessType&#x3a; &#x22;NATIVE&#x22;&#xd;&#xa;    usingConnectionPool&#x3a; true&#xd;&#xa;    databaseType&#x3a; &#x7b;&#xd;&#xa;&#xd;&#xa;            defaultDatabasePort&#x3a; -1&#xd;&#xa;            name&#x3a; &#x22;Generic database&#x22;&#xd;&#xa;            shortName&#x3a; &#x22;GENERIC&#x22;&#xd;&#xa;    &#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</note>
+      <xloc>747</xloc>
+      <yloc>41</yloc>
+      <width>382</width>
+      <heigth>428</heigth>
+      <fontname>Courier New</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+  </notepads>
+  <order>
+  <hop> <from>Get Variables</from><to>bodyJson</to><enabled>Y</enabled> </hop>
+  <hop> <from>add JDBC datasource</from><to>result &#x3c;&#x3e;200&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>test &#x28;candidate&#x29; connection</from><to>fail test&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>bodyJson</from><to>test &#x28;candidate&#x29; connection</to><enabled>N</enabled> </hop>
+  <hop> <from>fail test&#x3f;</from><to>Abort &#x28;test&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>fail test&#x3f;</from><to>add JDBC datasource</to><enabled>Y</enabled> </hop>
+  <hop> <from>result &#x3c;&#x3e;200&#x3f;</from><to>Abort &#x28;add&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>bodyJson</from><to>add JDBC datasource</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Abort &#x28;add&#x29;</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <row_threshold>0</row_threshold>
+      <message>There was an error trying to add a JDBC datasource</message>
+      <always_log_rows>Y</always_log_rows>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>652</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Abort &#x28;test&#x29;</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <row_threshold>0</row_threshold>
+      <message>There was an error testing the JDBC datasource</message>
+      <always_log_rows>Y</always_log_rows>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>652</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>connection_name</name>
+        <variable>&#x24;&#x7b;connection_name&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>db_ConnectionURL</name>
+        <variable>&#x24;&#x7b;db_ConnectionURL&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>db_driver</name>
+        <variable>&#x24;&#x7b;db_driver&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>db_user</name>
+        <variable>&#x24;&#x7b;db_user&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>db_password</name>
+        <variable>&#x24;&#x7b;db_password&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>96</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>add JDBC datasource</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>POST</method>
+    <url>&#x24;&#x7b;pentahoUrl&#x7d;&#x2f;plugin&#x2f;data-access&#x2f;api&#x2f;connection&#x2f;add</url>
+    <urlInField>N</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField/>
+    <bodyField>body</bodyField>
+    <httpLogin>&#x24;&#x7b;pentahoLogin&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;pentahoPassword&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;pentahoPassword&#x7d;</httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword/>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <result>
+      <name/>
+      <code>add_result</code>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>374</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>bodyJson</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#xa;bodyJson &#x3d; &#x7b;&#xa;	&#x22;name&#x22;&#x3a;&#x22;&#x22;,&#xa;	&#x22;password&#x22;&#x3a;&#x22;&#x22;,&#xa;	&#x22;username&#x22;&#x3a;&#x22;&#x22;,&#xa;&#xd;&#xa;	&#x22;attributes&#x22;&#x3a;&#x7b;&#xd;&#xa;    	&#x22;CUSTOM_DRIVER_CLASS&#x22;&#x3a; &#x22;&#x22;,&#xd;&#xa;    	&#x22;CUSTOM_URL&#x22;&#x3a; &#x22;&#x22; &#xd;&#xa;		&#x7d;,&#xd;&#xa;&#xa;	&#x22;accessType&#x22;&#x3a;&#x22;NATIVE&#x22;,&#xd;&#xa;	&#x22;usingConnectionPool&#x22;&#x3a; true,&#xa;	&#x22;databaseType&#x22;&#x3a;&#x7b;&#xa;		&#x22;defaultDatabasePort&#x22;&#x3a;0,&#xa;		&#x22;extraOptionsHelpUrl&#x22;&#x3a;&#x22;&#x22;,&#xa;		&#x22;name&#x22;&#x3a;&#x22;&#x22;,&#xa;		&#x22;shortName&#x22;&#x3a;&#x22;&#x22;,&#xa;		&#x22;supportedAccessTypes&#x22;&#x3a;&#x5b;&#x22;NATIVE&#x22;,&#x22;ODBC&#x22;,&#x22;JNDI&#x22;&#x5d;&#x7d;&#x7d;&#x3b;&#xa;&#xa;	bodyJson.name &#x3d; connection_name&#x3b;&#xa;	bodyJson.username &#x3d; db_user&#x3b;&#xd;&#xa;	bodyJson.password &#x3d; db_password&#x3b;&#xd;&#xa;&#xd;&#xa;	bodyJson.attributes.CUSTOM_DRIVER_CLASS &#x3d; db_driver&#x3b;&#xd;&#xa;	bodyJson.attributes.CUSTOM_URL &#x3d; db_ConnectionURL&#x3b;&#xd;&#xa;&#xa;	bodyJson.databaseType.defaultDatabasePort &#x3d; -1&#x3b;&#xa;	bodyJson.databaseType.name &#x3d; &#x22;Generic database&#x22;&#x3b;&#xa;	bodyJson.databaseType.shortName &#x3d; &#x22;GENERIC&#x22;&#x3b;&#xa;&#xa;&#xa;body &#x3d; JSON.stringify&#x28;&#xa;	bodyJson, &#xa;	function&#x28;key, value&#x29; &#x7b;&#xa;    	if &#x28;typeof value &#x3d;&#x3d;&#x3d; &#x27;number&#x27; &#x26;&#x26; &#x21;isFinite&#x28;value&#x29;&#x29; &#x7b;&#xa;    	    return String&#x28;value&#x29;&#x3b;&#xa;    	&#x7d;&#xa;    	return value&#x3b;&#xa;	&#x7d;&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>body</name>
+        <rename>body</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>235</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>fail test&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Abort &#x28;test&#x29;</send_true_to>
+<send_false_to>add JDBC datasource</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>test_result</leftvalue>
+ <function>&#x3c;&#x3e;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Integer</type><text>200</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>513</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>result &#x3c;&#x3e;200&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>add_result</leftvalue>
+ <function>&#x3c;&#x3e;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Integer</type><text>200</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>513</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>test &#x28;candidate&#x29; connection</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>PUT</method>
+    <url>&#x24;&#x7b;pentahoUrl&#x7d;&#x2f;plugin&#x2f;data-access&#x2f;api&#x2f;connection&#x2f;test</url>
+    <urlInField>N</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField/>
+    <bodyField>body</bodyField>
+    <httpLogin>&#x24;&#x7b;pentahoLogin&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;pentahoPassword&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;pentahoPassword&#x7d;</httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword/>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <result>
+      <name/>
+      <code>test_result</code>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>374</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+<attributes><group><name>DataService</name>
+</group></attributes>
+
+</transformation>
